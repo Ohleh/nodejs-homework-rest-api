@@ -10,6 +10,7 @@ const listContacts = async () => {
 };
 
 const getContactById = async (contactId) => {
+  console.log("first", contactId);
   const response = await listContacts();
   const contactsById = response.find((el) => el.id === contactId);
   return contactsById || null;
