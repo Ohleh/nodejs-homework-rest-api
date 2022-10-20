@@ -30,7 +30,30 @@ router.get("/:contactId", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  res.json({ message: "template message" });
+  try {
+    const { name, email, phone } = req.body;
+    const addNewContact = await contactsList.addContact(req.body);
+    if (!name) {
+      return res.status(400).json({
+        message: "missing required Name field",
+      });
+    }
+    if (!email) {
+      return res.status(400).json({
+        message: "missing required Email field",
+      });
+    }
+    if (!phone) {
+      return res.status(400).json({
+        message: "missing required Phone field",
+      });
+    }
+    res.json(addNewContact);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
 });
 
 router.delete("/:contactId", async (req, res, next) => {
