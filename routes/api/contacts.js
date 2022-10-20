@@ -48,7 +48,7 @@ router.post("/", async (req, res, next) => {
         message: "missing required Phone field",
       });
     }
-    res.json(addNewContact);
+    res.status(201).json(addNewContact);
   } catch (error) {
     res.status(500).json({
       message: error.message,
