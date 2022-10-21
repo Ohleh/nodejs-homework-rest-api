@@ -16,14 +16,17 @@ const getContactById = async (contactId) => {
   return contactsById || null;
 };
 
-const removeContact = async (contactId) => {};
+const removeContact = async (contactId) => {
+  const response = await listContacts();
+  const removedList = response.filter((el) => el.id !== contactId);
+  const newContactList = [...removedList];
+  const addData = JSON.stringify(newContactList, null, 2);
+  return await fs.writeFile(contactsPath, addData, "utf8");
+};
 
 const addContact = async (body) => {
   const response = await listContacts();
   const { name, email, phone } = body;
-  console.log("name", name);
-  console.log("email", email);
-  console.log("phone", phone);
   const newContact = {
     id: nanoid(),
     name,
