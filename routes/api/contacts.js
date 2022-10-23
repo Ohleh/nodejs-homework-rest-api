@@ -39,26 +39,26 @@ router.get("/:contactId", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     // const { error } = addSchema.validate(req.body);
-    const { name, email, phone } = req.body;
+    // const { name, email, phone } = req.body;
     const addNewContact = await contactsList.addContact(req.body);
     // if (error) {
     //   res.status(400).json({ message: "missing required name field" });
     // }
-    if (!name) {
-      return res.status(400).json({
-        message: "missing required Name field",
-      });
-    }
-    if (!email) {
-      return res.status(400).json({
-        message: "missing required Email field",
-      });
-    }
-    if (!phone) {
-      return res.status(400).json({
-        message: "missing required Phone field",
-      });
-    }
+    // if (!name) {
+    //   return res.status(400).json({
+    //     message: "missing required Name field",
+    //   });
+    // }
+    // if (!email) {
+    //   return res.status(400).json({
+    //     message: "missing required Email field",
+    //   });
+    // }
+    // if (!phone) {
+    //   return res.status(400).json({
+    //     message: "missing required Phone field",
+    //   });
+    // }
     res.status(201).json(addNewContact);
   } catch (error) {
     res.status(500).json({
@@ -85,7 +85,21 @@ router.delete("/:contactId", async (req, res, next) => {
 });
 
 router.put("/:contactId", async (req, res, next) => {
-  res.json({ message: "template message" });
+  try {
+    const { contactId } = req.params;
+    // const { name, email, phone } = req.body;
+    if (!req.body) {
+      res.status(400).json({
+        message: "missing fields",
+      });
+    }
+    const updadeData = await contactsList.updateContact(contactId, req.body);
+    res.status(200).json(updadeData);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
 });
 
 module.exports = router;

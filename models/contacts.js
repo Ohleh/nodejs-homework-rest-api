@@ -25,6 +25,7 @@ const removeContact = async (contactId) => {
 };
 
 const addContact = async (body) => {
+  console.log(body);
   const response = await listContacts();
   const { name, email, phone } = body;
   const newContact = {
@@ -40,7 +41,16 @@ const addContact = async (body) => {
   return newContact;
 };
 
-const updateContact = async (contactId, body) => {};
+const updateContact = async (contactId, body) => {
+  const response = await listContacts();
+  const { name, email, phone } = body;
+  const [contactById] = response.filter((el) => el.id === contactId);
+  console.log("contactById", contactById);
+  contactById.name = name;
+  contactById.email = email;
+  contactById.phone = phone;
+  console.log("contactById", contactById);
+};
 
 module.exports = {
   listContacts,
