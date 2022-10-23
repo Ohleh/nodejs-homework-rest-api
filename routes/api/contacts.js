@@ -71,12 +71,15 @@ router.delete("/:contactId", async (req, res, next) => {
   try {
     const { contactId } = req.params;
     const removeContact = await contactsList.removeContact(contactId);
-    // if (!contactId) {
-    //   res
-    //     .status(404)
-    //     .json({ message: "this ID doesn`t exist, nothing to remove" });
-    // }
-    res.json(removeContact);
+    if (!removeContact) {
+      res
+        .status(404)
+        .json({ message: "This contactId doesn`t exist, nothing to remove" });
+    }
+    // status 204, але він не повертає повідомлення тому його не пишемо
+    res.json({
+      message: `Contact with ${contactId} successfully deleted`,
+    });
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -87,7 +90,6 @@ router.delete("/:contactId", async (req, res, next) => {
 router.put("/:contactId", async (req, res, next) => {
   try {
     const { contactId } = req.params;
-    // const { name, email, phone } = req.body;
     if (!req.body) {
       res.status(400).json({
         message: "missing fields",
