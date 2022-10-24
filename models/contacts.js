@@ -20,6 +20,9 @@ const getContactById = async (contactId) => {
 
 const removeContact = async (contactId) => {
   const response = await listContacts();
+  const findId = response.find((el) => el.id === contactId);
+  if (!findId) return null;
+
   const removedList = response.filter((el) => el.id !== contactId);
   // const [result] = books.splice(index, 1);
   const newContactList = [...removedList];
@@ -51,7 +54,7 @@ const updateContact = async (contactId, body) => {
     return null;
   }
   response[index] = {
-    contactId,
+    id: contactId,
     name,
     email,
     phone,
