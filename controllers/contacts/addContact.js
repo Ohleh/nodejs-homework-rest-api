@@ -11,6 +11,7 @@ const addContact = async (req, res, next) => {
       // error.status = 400;
       // res.status(400);
       // throw error;
+      // test
     }
     const addNewContact = await contactsList.addContact(req.body);
     res.status(201).json(addNewContact);

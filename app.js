@@ -1,4 +1,14 @@
 // https://github.com/BogdanLyamzin/Node.js-45-46/tree/master/lesson-4
+
+const mongoose = require("mongoose");
+const DB_HOST =
+  "mongodb+srv://ohleh:olehmongo2022@cluster0.zduqxc2.mongodb.net/db-contacts?retryWrites=true&w=majority";
+
+mongoose
+  .connect(DB_HOST)
+  .then(() => console.log("Database connection successful"))
+  .catch((error) => console.log(error.message));
+
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
