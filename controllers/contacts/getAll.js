@@ -8,6 +8,11 @@ const getAll = async (req, res, next) => {
     res.status(500).json({
       message: error.message,
     });
+    //  або
+    //  catch (e) {
+    //  console.error(e);
+    //  next(e);
+    // }
   }
 };
 
