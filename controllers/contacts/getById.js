@@ -3,8 +3,10 @@ const Contact = require("../../models/contacts");
 const getById = async (req, res) => {
   try {
     const { contactId } = req.params;
-    // const getById = await Contact.findOne({ _id: contactId });
+    // дя пошуку по ID
     const getById = await Contact.findById(contactId);
+    // для пошуку по чомусь іншому
+    // const getById = await Contact.findOne({ _id: contactId });
     if (!getById) {
       return res.status(404).json({ message: "not found by this id" });
     }
