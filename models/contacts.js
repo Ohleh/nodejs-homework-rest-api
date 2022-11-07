@@ -1,22 +1,27 @@
 const { Schema, model } = require("mongoose");
 
 // створили схему
-const contactsSchema = new Schema({
-  name: {
-    type: String,
-    required: [true, "Set name for contact"],
+const contactsSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Set name for contact"],
+    },
+    email: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    favorite: {
+      type: Boolean,
+      default: false,
+    },
   },
-  email: {
-    type: String,
-  },
-  phone: {
-    type: String,
-  },
-  favorite: {
-    type: Boolean,
-    default: false,
-  },
-});
+  { versionkey: false, timestamps: true }
+);
+
+// додати схеми джой сюди також
 
 // створюємо модель (викликаємо функцію модел)
 const Contact = model("contact", contactsSchema);
