@@ -1,4 +1,4 @@
-const Contact = require("../../models/contacts");
+const { Contact } = require("../../models/contacts");
 
 // const contactsList = require("../../models/contacts");
 

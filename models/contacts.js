@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const Joi = require("joi");
 
 // створили схему
 const contactsSchema = new Schema(
@@ -21,12 +22,25 @@ const contactsSchema = new Schema(
   { versionkey: false, timestamps: true }
 );
 
-// додати схеми джой сюди також
+const addSchema = Joi.object({
+  name: Joi.string().required(),
+  email: Joi.string().required(),
+  phone: Joi.string().required(),
+});
+
+const updateFavoriteSchema = Joi.object({
+  favorite: Joi.boolean().required(),
+});
+
+const schema = {
+  addSchema,
+  updateFavoriteSchema,
+};
 
 // створюємо модель (викликаємо функцію модел)
 const Contact = model("contact", contactsSchema);
 
-module.exports = Contact;
+module.exports = { Contact, schema };
 
 // ///////////////
 
