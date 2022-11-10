@@ -1,12 +1,5 @@
-const contactsList = require("../../models/contacts");
+const Contact = require("../../models/contacts");
 const schema = require("../../Schema/addSchema");
-// const Joi = require("joi");
-
-// const addSchema = Joi.object({
-//   name: Joi.string().required(),
-//   email: Joi.string().required(),
-//   phone: Joi.string().required(),
-// });
 
 const updateContact = async (req, res, next) => {
   try {
@@ -16,7 +9,10 @@ const updateContact = async (req, res, next) => {
     }
     const { contactId } = req.params;
 
-    const updadeData = await contactsList.updateContact(contactId, req.body);
+    const updadeData = await Contact.findByIdAndUpdate(contactId, req.body, {
+      new: true,
+    });
+    // додаємо об'єкт {new: true}, щоб метод findByIdAndUpdate повертав нову версію, а не стару
     if (!updadeData) {
       return res.status(404).json({
         message: "Not found",
