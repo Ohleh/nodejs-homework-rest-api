@@ -1,15 +1,17 @@
-const contactsList = require("../../models/contacts");
+const { Contact } = require("../../models/contacts");
+// const { RequestError } = require("../../helpers");
 
-const removeContact = async (req, res, next) => {
+const removeContact = async (req, res) => {
   try {
     const { contactId } = req.params;
-    const removeContact = await contactsList.removeContact(contactId);
+    const removeContact = await Contact.findByIdAndRemove(contactId);
     if (!removeContact) {
+      // ! throw RequestError(404, "not found");
       return res
         .status(404)
         .json({ message: "This contactId doesn`t exist, nothing to remove" });
     }
-    // 204 але не пишемо, ставиться автоматом
+    // ! res.json({message: "Book removed"});
     res.status(200).json({
       message: `Contact with ${contactId} successfully deleted`,
     });

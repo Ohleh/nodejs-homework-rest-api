@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+// ! const schema = require("../../models/contacts");
 const isValidId = require("../../middlewares/isValidId");
 
 const ctrl = require("../../controllers/contacts");
