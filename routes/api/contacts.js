@@ -5,7 +5,7 @@ const isValidId = require("../../middlewares/isValidId");
 const ctrl = require("../../controllers/contacts");
 const ctrlWrapper = require("../../helpers");
 
-router.get("/", ctrlWrapper(ctrl.getAl)l);
+router.get("/", ctrlWrapper(ctrl.getAll));
 
 router.get("/:contactId", isValidId, ctrlWrapper(ctrl.getById));
 
