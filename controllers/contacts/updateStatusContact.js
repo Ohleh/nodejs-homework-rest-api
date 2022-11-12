@@ -3,7 +3,7 @@ const { Contact, schema } = require("../../models/contacts");
 
 const updateStatusContact = async (req, res, next) => {
   try {
-    const { error } = schema.addSchema.validate(req.body);
+    const { error } = schema.updateFavoriteSchema.validate(req.body);
     if (error) {
       return res.status(400).json({ message: "missing required name field" });
     }
