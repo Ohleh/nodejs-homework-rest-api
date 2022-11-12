@@ -20,6 +20,7 @@ const contactsSchema = new Schema(
     },
   },
   { versionkey: false, timestamps: true }
+  // час створення та час останнього оновлення
 );
 
 const addSchema = Joi.object({

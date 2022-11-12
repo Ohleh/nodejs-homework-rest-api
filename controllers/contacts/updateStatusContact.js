@@ -1,7 +1,7 @@
 const { Contact, schema } = require("../../models/contacts");
 // const schema = require("../../Schema/addSchema");
 
-const updateFavorite = async (req, res, next) => {
+const updateStatusContact = async (req, res, next) => {
   try {
     const { error } = schema.addSchema.validate(req.body);
     if (error) {
@@ -12,6 +12,8 @@ const updateFavorite = async (req, res, next) => {
     const updadeData = await Contact.findByIdAndUpdate(contactId, req.body, {
       new: true,
     });
+
+    // додаємо об'єкт {new: true}, щоб метод findByIdAndUpdate повертав нову версію, а не стару
     if (!updadeData) {
       // ! throw RequestError(404, "not found");
       return res.status(404).json({
@@ -27,4 +29,4 @@ const updateFavorite = async (req, res, next) => {
   }
 };
 
-module.exports = updateFavorite;
+module.exports = updateStatusContact;

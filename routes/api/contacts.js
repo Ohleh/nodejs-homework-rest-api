@@ -19,7 +19,7 @@ router.put("/:contactId", isValidId, ctrlWrapper(ctrl.updateContact));
 router.patch(
   "/:contactId/favorite",
   isValidId,
-  ctrlWrapper(ctrl.updateContact)
+  ctrlWrapper(ctrl.updateStatusContact)
 );
 
 module.exports = router;
