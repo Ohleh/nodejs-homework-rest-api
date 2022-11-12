@@ -1,5 +1,4 @@
 const { Contact, schema } = require("../../models/contacts");
-// const schema = require("../../Schema/addSchema");
 
 const updateStatusContact = async (req, res, next) => {
   try {
