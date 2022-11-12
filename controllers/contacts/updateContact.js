@@ -1,24 +1,17 @@
-const { Contact, schema } = require("../../models/contacts");
+const { Contact } = require("../../models/contacts");
+const { RequestError } = require("../../helpers");
 // const schema = require("../../Schema/addSchema");
 
 const updateContact = async (req, res, next) => {
   try {
-    const { error } = schema.addSchema.validate(req.body);
-    if (error) {
-      return res.status(400).json({ message: "missing required name field" });
-    }
     const { contactId } = req.params;
-
     const updadeData = await Contact.findByIdAndUpdate(contactId, req.body, {
       new: true,
     });
     // додаємо об'єкт {new: true}, щоб метод findByIdAndUpdate повертав нову версію, а не стару
     if (!updadeData) {
-      return res.status(404).json({
-        message: "Not found",
-      });
+      throw RequestError(404, "not found");
     }
-
     res.status(200).json(updadeData);
   } catch (error) {
     res.status(500).json({
