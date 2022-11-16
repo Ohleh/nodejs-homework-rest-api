@@ -4,7 +4,7 @@ const { Contact } = require("../../models/contacts");
 
 const getAll = async (_, res) => {
   try {
-    const AllContacts = await Contact.find({});
+    const AllContacts = await Contact.find({}, { __v: 0 });
     // показати конктерні поля name phone
     // const AllContacts = await Contact.find({}, "name phone");
     // окрім полів -name -email

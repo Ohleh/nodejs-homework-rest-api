@@ -1,10 +1,10 @@
 const { Contact } = require("../../models/contacts");
 
-const getById = async (req, res) => {
+const getNameById = async (req, res) => {
   try {
     const { contactId } = req.params;
     // дя пошуку по ID
-    const getById = await Contact.findById(contactId, { __v: 0 });
+    const getById = await Contact.findById(contactId, { name: 1, _id: 0 });
     // для пошуку по чомусь іншому
     // const getById = await Contact.findOne({ _id: contactId });
     if (!getById) {
@@ -18,4 +18,4 @@ const getById = async (req, res) => {
   }
 };
 
-module.exports = getById;
+module.exports = getNameById;

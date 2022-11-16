@@ -10,6 +10,8 @@ router.get("/", ctrlWrapper(ctrl.getAll));
 
 router.get("/:contactId", isValidId, ctrlWrapper(ctrl.getById));
 
+router.get("/name/:contactId", isValidId, ctrlWrapper(ctrl.getNameById));
+
 router.post("/", validateBody(schema.addSchema), ctrl.addContact);
 
 router.delete("/:contactId", isValidId, ctrlWrapper(ctrl.removeContact));
