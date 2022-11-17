@@ -1,20 +1,12 @@
 // https://github.com/BogdanLyamzin/Node.js-45-46/tree/master/lesson-4
 
-// const dotenv = require("dotenv");
-// const DB_HOST = require("./config");
-// dotenv.config();
-// const { DB_HOST } = process.env;
-// console.log(DB_HOST);
-
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
-// або
-// const dotenv = require("dotenv");
-// dotenv.config();
 
 const contactsRouter = require("./routes/api/contacts");
+const authRouter = require("./routes/api/auth");
 
 const app = express();
 
@@ -25,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/contacts", contactsRouter);
+app.use("/api/auth", authRouter);
 
 app.use((_, res, __) => {
   res.status(404).json({
