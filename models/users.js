@@ -25,7 +25,8 @@ const usersSchema = new Schema(
     },
     token: String,
   },
-  { versionkey: false, timestamps: true }
+  { versionkey: false, timestamps: true },
+  { __v: 0 }
 );
 
 // usersSchema.post("save", handleSaveErrors);

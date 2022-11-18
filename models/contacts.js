@@ -18,6 +18,10 @@ const contactsSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    // owner: {
+    //   type: SchemaTypes.ObjectId,
+    //   ref: "user",
+    // },
   },
   { versionkey: false, timestamps: true }
   // час створення та час останнього оновлення
