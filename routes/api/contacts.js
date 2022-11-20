@@ -1,23 +1,34 @@
 const express = require("express");
 const router = express.Router();
 const { schema } = require("../../models/contacts");
-const { isValidId, validateBody } = require("../../middlewares");
+const { isValidId, validateBody, autheticate } = require("../../middlewares");
 
 const ctrl = require("../../controllers/contacts");
 const { ctrlWrapper } = require("../../helpers");
 
-router.get("/", ctrlWrapper(ctrl.getAll));
+router.get("/", autheticate, ctrlWrapper(ctrl.getAll));
 
-router.get("/:contactId", isValidId, ctrlWrapper(ctrl.getById));
+router.get("/:contactId", autheticate, isValidId, ctrlWrapper(ctrl.getById));
 
-router.get("/name/:contactId", isValidId, ctrlWrapper(ctrl.getNameById));
+router.get(
+  "/name/:contactId",
+  autheticate,
+  isValidId,
+  ctrlWrapper(ctrl.getNameById)
+);
 
-router.post("/", validateBody(schema.addSchema), ctrl.addContact);
+router.post("/", autheticate, validateBody(schema.addSchema), ctrl.addContact);
 
-router.delete("/:contactId", isValidId, ctrlWrapper(ctrl.removeContact));
+router.delete(
+  "/:contactId",
+  autheticate,
+  isValidId,
+  ctrlWrapper(ctrl.removeContact)
+);
 
 router.put(
   "/:contactId",
+  autheticate,
   isValidId,
   validateBody(schema.addSchema),
   ctrlWrapper(ctrl.updateContact)
@@ -26,6 +37,7 @@ router.put(
 router.patch(
   "/:contactId/favorite",
   isValidId,
+  autheticate,
   validateBody(schema.updateFavoriteSchema),
   ctrlWrapper(ctrl.updateStatusContact)
 );
