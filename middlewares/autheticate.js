@@ -20,8 +20,8 @@ const { SECRET_KEY } = process.env;
 // створюємо нашу мідлвару (функу для перевірки)
 const autheticate = async (req, res, next) => {
   try {
-    const { authorization } = req.headers;
-    const [bearer, token] = authorization.split(" ");
+    const { authorization = "" } = req.headers;
+    const [bearer = "", token = ""] = authorization.split(" ");
     if (!bearer) {
       throw RequestError(401);
     }
@@ -33,6 +33,7 @@ const autheticate = async (req, res, next) => {
       if (!user) {
         throw Error("Unauthorized");
       }
+      req.user = user;
       next();
     } catch (error) {
       throw RequestError(401, error.message);
