@@ -33,6 +33,7 @@ const autheticate = async (req, res, next) => {
       if (!user) {
         throw Error("Unauthorized");
       }
+      // записуємо в req.user значення юезра, щоб потім присвоїти його ID для owner
       req.user = user;
       next();
     } catch (error) {
