@@ -30,7 +30,7 @@ const autheticate = async (req, res, next) => {
       const { id } = jwt.verify(token, SECRET_KEY);
       // шукаємо користувача з таким id
       const user = await Users.findById(id);
-      if (!user) {
+      if (!user || !user.token) {
         throw Error("Unauthorized");
       }
       // записуємо в req.user значення юезра, щоб потім присвоїти його ID для owner
