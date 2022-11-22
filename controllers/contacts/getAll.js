@@ -17,7 +17,7 @@ const getAll = async (req, res) => {
         skip,
         limit,
       }
-    );
+    ).populate("owner", "name email");
 
     res.status(200).json(AllContacts);
   } catch (error) {
