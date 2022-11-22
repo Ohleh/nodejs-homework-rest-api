@@ -31,7 +31,7 @@ const autheticate = async (req, res, next) => {
       // шукаємо користувача з таким id
       const user = await Users.findById(id);
       if (!user || !user.token) {
-        throw Error("Unauthorized");
+        throw Error("Unauthorized (invalid token)");
       }
       // записуємо в req.user значення юезра, щоб потім присвоїти його ID для owner
       req.user = user;
