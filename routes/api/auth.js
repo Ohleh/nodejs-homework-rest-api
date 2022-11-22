@@ -2,7 +2,7 @@ const express = require("express");
 
 const ctrl = require("../../controllers/auth");
 
-const { validateBody } = require("../../middlewares");
+const { validateBody, autheticate } = require("../../middlewares");
 
 const { ctrlWrapper } = require("../../helpers");
 
@@ -23,5 +23,7 @@ router.post(
   validateBody(schemas.loginSchema),
   ctrlWrapper(ctrl.login)
 );
+
+router.get("/current", autheticate, ctrlWrapper(ctrl.getCurrent));
 
 module.exports = router;

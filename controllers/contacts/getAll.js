@@ -8,16 +8,17 @@ const getAll = async (req, res) => {
 
   try {
     const { _id: owner } = req.user;
-    const AllContacts = await Contact.find({ owner }, { __v: 0 });
-    // показати конктерні поля name phone
-    // const AllContacts = await Contact.find({}, "name phone", "-__v");
-    // окрім полів -name -email, або через .select({__v:0})
-    // const AllContacts = await Contact.find({}, "-name -email");
-    // пагінація, показати (5шт) постів з назвою name
-    // const AllContacts = await Contact.find({}, {name: 1}).limit(5);
-    // пагінація, пропустити перші 5шт і показати наступні 5шт:
-    // const AllContacts = await Contact.find({}, {name: 1}).skip(5).limit(5);
-    // skip можна "0", а можна можна використовувати без limit.
+    const { page = 1, limit = 20 } = req.query;
+    const skip = (page - 1) * limit;
+    const AllContacts = await Contact.find(
+      { owner },
+      "-createdAt, -updatedAt, -__v",
+      {
+        skip,
+        limit,
+      }
+    );
+
     res.status(200).json(AllContacts);
   } catch (error) {
     res.status(500).json({
@@ -32,3 +33,13 @@ const getAll = async (req, res) => {
 };
 
 module.exports = getAll;
+
+// показати конктерні поля name phone
+// const AllContacts = await Contact.find({}, "name phone", "-__v");
+// окрім полів -name -email, або через .select({__v:0})
+// const AllContacts = await Contact.find({}, "-name -email");
+// пагінація, показати (5шт) постів з назвою name
+// const AllContacts = await Contact.find({}, {name: 1}).limit(5);
+// пагінація, пропустити перші 5шт і показати наступні 5шт:
+// const AllContacts = await Contact.find({}, {name: 1}).skip(5).limit(5);
+// skip можна "0", а можна можна використовувати без limit.
