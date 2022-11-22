@@ -2,12 +2,13 @@ const { Contact } = require("../../models/contacts");
 
 // const contactsList = require("../../models/contacts");
 
-const getAll = async (_, res) => {
+const getAll = async (req, res) => {
   // const { __id: usedId } = req.user;
   // const { skip = 0, limit = 0 } = req.query;
 
   try {
-    const AllContacts = await Contact.find({}, { __v: 0 });
+    const { _id: owner } = req.user;
+    const AllContacts = await Contact.find({ owner }, { __v: 0 });
     // показати конктерні поля name phone
     // const AllContacts = await Contact.find({}, "name phone", "-__v");
     // окрім полів -name -email, або через .select({__v:0})
