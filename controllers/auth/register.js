@@ -9,7 +9,7 @@ const register = async (req, res) => {
 
   const user = await Users.findOne({ email });
   if (user) {
-    throw RequestError(409, "Email is used");
+    throw RequestError(409, "Email in use");
   }
 
   const hashPassword = await bcrypt.hash(password, 10);
@@ -19,8 +19,12 @@ const register = async (req, res) => {
     password: hashPassword,
   });
   res.status(201).json({
-    name: newUser.name,
-    email: newUser.email,
+    user: {
+      // name: newUser.name,
+      email: newUser.email,
+      subscription: "starter",
+      message: "Successfuly registered. Please login to enter",
+    },
   });
 };
 

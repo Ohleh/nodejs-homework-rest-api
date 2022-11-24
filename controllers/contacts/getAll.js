@@ -8,7 +8,7 @@ const getAll = async (req, res) => {
 
   try {
     const { _id: owner } = req.user;
-    const { page = 1, limit = 20 } = req.query;
+    const { page = 1, limit = 2 } = req.query;
     const skip = (page - 1) * limit;
     const AllContacts = await Contact.find(
       { owner },

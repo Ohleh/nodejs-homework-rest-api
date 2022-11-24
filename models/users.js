@@ -6,10 +6,10 @@ const Joi = require("joi");
 
 const usersSchema = new Schema(
   {
-    name: {
-      type: String,
-      required: [true, "Set name for user"],
-    },
+    // name: {
+    //   type: String,
+    //   required: [true, "Set name for user"],
+    // },
     password: {
       type: String,
       required: [true, "Set password for user"],
@@ -33,7 +33,7 @@ const usersSchema = new Schema(
 // usersSchema.post("save", handleSaveErrors);
 
 const registerSchema = Joi.object({
-  name: Joi.string().required(),
+  // name: Joi.string().required(),
   email: Joi.string().required(),
   password: Joi.string().min(6).required(),
 });
