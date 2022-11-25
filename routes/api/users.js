@@ -1,8 +1,13 @@
 const express = require("express");
 
 const ctrl = require("../../controllers/auth");
+const sub = require("../../controllers/subscription");
 
-const { validateBody, autheticate } = require("../../middlewares");
+const {
+  validateBody,
+  autheticate,
+  subscriptionValidate,
+} = require("../../middlewares");
 
 const { ctrlWrapper } = require("../../helpers");
 
@@ -27,5 +32,13 @@ router.post(
 router.get("/current", autheticate, ctrlWrapper(ctrl.getCurrent));
 
 router.get("/logout", autheticate, ctrlWrapper(ctrl.logout));
+
+// subscription
+router.patch(
+  "/",
+  autheticate,
+  // validateBody(schemas.subscriptionSchema),
+  ctrlWrapper(sub.subscription)
+);
 
 module.exports = router;
