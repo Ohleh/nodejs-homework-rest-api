@@ -8,18 +8,29 @@ const getAll = async (req, res) => {
 
   try {
     const { _id: owner } = req.user;
-    const { page = 1, limit = 10 } = req.query;
+    const { page = 1, limit = 5, favorite } = req.query;
     const skip = (page - 1) * limit;
-    const AllContacts = await Contact.find(
-      { owner },
-      "-createdAt, -updatedAt, -__v",
-      {
-        skip,
-        limit,
-      }
-    ).populate("owner", "name email");
-
-    res.status(200).json(AllContacts);
+    if (favorite) {
+      const filterFavorite = await Contact.find(
+        { owner, favorite: true },
+        "-createdAt, -updatedAt, -__v",
+        {
+          skip,
+          limit,
+        }
+      ).populate("owner", "name email");
+      res.status(200).json(filterFavorite);
+    } else {
+      const AllContacts = await Contact.find(
+        { owner },
+        "-createdAt, -updatedAt, -__v",
+        {
+          skip,
+          limit,
+        }
+      ).populate("owner", "name email");
+      res.status(200).json(AllContacts);
+    }
   } catch (error) {
     res.status(500).json({
       message: error.message,
