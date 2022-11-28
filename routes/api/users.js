@@ -3,11 +3,7 @@ const express = require("express");
 const ctrl = require("../../controllers/auth");
 const sub = require("../../controllers/subscription");
 
-const {
-  validateBody,
-  autheticate,
-  subscriptionValidate,
-} = require("../../middlewares");
+const { validateBody, autheticate } = require("../../middlewares");
 
 const { ctrlWrapper } = require("../../helpers");
 
