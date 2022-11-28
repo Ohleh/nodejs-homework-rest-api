@@ -2,6 +2,7 @@ const express = require("express");
 
 const ctrl = require("../../controllers/auth");
 const sub = require("../../controllers/subscription");
+const up = require("../../controllers/upload");
 
 const { validateBody, autheticate } = require("../../middlewares");
 
@@ -36,5 +37,7 @@ router.patch(
   // validateBody(schemas.subscriptionSchema),
   ctrlWrapper(sub.subscription)
 );
+
+router.get("/avatars", autheticate, ctrlWrapper(up.uploadAvatar));
 
 module.exports = router;
