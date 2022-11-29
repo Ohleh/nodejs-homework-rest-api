@@ -6,7 +6,7 @@ const uploadAvatar = async (req, res) => {
     //   new: true,
     // });
     //
-    res.json({ "success" });
+    res.json({ status: "success" });
   } catch (error) {
     res.status(500).json({
       message: error.message,

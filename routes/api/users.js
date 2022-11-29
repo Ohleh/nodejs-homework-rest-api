@@ -1,4 +1,6 @@
 const express = require("express");
+const router = express.Router();
+const path = require("path");
 
 const ctrl = require("../../controllers/auth");
 const sub = require("../../controllers/subscription");
@@ -10,7 +12,7 @@ const { ctrlWrapper } = require("../../helpers");
 
 const { schemas } = require("../../models/users");
 
-const router = express.Router();
+const FILE_DIR = path.resolve("./public/avatars");
 
 // signup
 router.post(
@@ -38,6 +40,7 @@ router.patch(
   ctrlWrapper(sub.subscription)
 );
 
-router.get("/avatars", autheticate, ctrlWrapper(up.uploadAvatar));
+router.post("/avatars", autheticate, ctrlWrapper(up.uploadAvatar));
+router.use("/avatars", express.static(FILE_DIR));
 
 module.exports = router;
