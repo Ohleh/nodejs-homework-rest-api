@@ -3,10 +3,12 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 
 const contactsRouter = require("./routes/api/contacts");
 const authRouter = require("./routes/api/users");
+const FILE_DIR = path.resolve("./public/avatars");
 
 const app = express();
 
@@ -18,6 +20,7 @@ app.use(express.json());
 
 app.use("/api/contacts", contactsRouter);
 app.use("/api/users", authRouter);
+app.use("/avatars", express.static(FILE_DIR));
 
 app.use((_, res, __) => {
   res.status(404).json({
