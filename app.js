@@ -20,6 +20,7 @@ const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public")); // щоб express не блокував доступ до статичного файла з розшиненням, в папці public
 
 // const multerConfig = multer.diskStorage({
 //   destination: tmpDir,
