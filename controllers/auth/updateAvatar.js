@@ -17,12 +17,12 @@ const updateAvatar = async (req, res) => {
 
     await fs.rename(tempUpload, resultUpload); // переміщуємо
 
-    async function resize() {
-      const image = await Jimp.read(resultUpload);
-      image.resize(250, 250);
-      image.write(resultUpload);
-    }
-    resize();
+    // async function resize() {
+    const image = await Jimp.read(resultUpload);
+    image.resize(250, 250);
+    image.write(resultUpload);
+    // }
+    // resize();
 
     const avatarURL = path.join("avatars", fileName); // пишемо новий шлях // "avatars" без public бо вже вказана app.use(express.static("public"));
     await Users.findByIdAndUpdate(_id, { avatarURL }); // відпоавили відповідь, змінили шлях
@@ -37,27 +37,3 @@ const updateAvatar = async (req, res) => {
 };
 
 module.exports = updateAvatar;
-
-// const image = await Jimp.read(tempUpload);
-// console.log("image:", image);
-// await image.resize(250, 250);
-// console.log("image___2:", image);
-
-// Jimp.read(tempUpload)
-//   .then((image) => {
-//     return image.resize(100, 100); // resize
-//   })
-//   .catch((err) => {
-//     console.error(err);
-//   });
-
-//
-
-// try {
-//   const imaginarium = await Jimp.read(resultUpload);
-//   console.log("imaginarium1:", imaginarium);
-//   await imaginarium.resize(100, 100);
-//   console.log("imaginarium2:", imaginarium);
-// } catch (error) {
-//   console.log("no file", error.message);
-// }
