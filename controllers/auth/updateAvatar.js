@@ -7,11 +7,14 @@ const avatarsDir = path.join(__dirname, "../../", "public", "avatars");
 
 const updateAvatar = async (req, res) => {
   try {
-    const { _id } = req.user;
+    const { _id, email } = req.user;
     const { path: tempUpload, originalname } = req.file; // дістаємо
-    const resultUpload = path.join(avatarsDir, originalname); // створюємо шлях де він має зберігаьтися, до папки з аватарками з оріджинал нейм
+    const extention = originalname.split(".").pop();
+    const nameEmail = email.split("@", 1);
+    const fileName = `${nameEmail}-${_id}.${extention}`;
+    const resultUpload = path.join(avatarsDir, fileName); // створюємо шлях де він має зберігаьтися, до папки з аватарками з оріджинал нейм
     await fs.rename(tempUpload, resultUpload); // переміщуємо
-    const avatarUrl = path.join("avatars", originalname); // пишемо новий шлях // "avatars" без public бо вже вказана app.use(express.static("public"));
+    const avatarUrl = path.join("avatars", fileName); // пишемо новий шлях // "avatars" без public бо вже вказана app.use(express.static("public"));
     await Users.findByIdAndUpdate(_id, { avatarUrl }); // відпоавили відповідь, змінили шлях
     res.json({ avatarUrl });
   } catch (error) {
