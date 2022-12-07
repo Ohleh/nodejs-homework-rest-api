@@ -19,11 +19,7 @@ const register = async (req, res) => {
     password: hashPassword,
     avatarURL,
   });
-  // const avatarURL = gravatar.url(
-  //   newUser.email,
-  //   { s: "100", r: "x", d: "retro" },
-  //   true
-  // );
+
   res.status(201).json({
     user: {
       // name: newUser.name,
