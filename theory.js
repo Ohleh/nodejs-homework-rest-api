@@ -58,6 +58,6 @@ try {
 
 //
 
-// echo "export SENDGRID_API_KEY='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'" > sendgrid.env
+// echo "export SENDGRID_API_KEY=''" > sendgrid.env
 // echo "sendgrid.env" >> .gitignore
 // source ./sendgrid.env
