@@ -17,5 +17,14 @@ const mail = {
 // для відправки листа метод send і then якщо ок або error
 sgMail
   .send(mail)
-  .then(() => console.log("Mail send success"))
+  .then(() => console.log("Email send success"))
   .catch((error) => console.log(error.message));
+
+// або як фунція:
+// const makeSend = async (data) => {
+//   const makeSendMail = { ...data, from: "aerial1@meta.ua" };
+//   await sgMail.send(makeSendMail);
+//   return true;
+// };
+
+// module.exports = makeSend;
