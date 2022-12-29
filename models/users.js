@@ -33,10 +33,12 @@ const usersSchema = new Schema(
       default: "",
     },
     verify: {
+      // чи є емейл верифікований
       type: Boolean,
       default: false,
     },
     verificationToken: {
+      // токен вариф. який будемо відправляти на пошту і зберігати
       type: String,
       required: [true, "Verify token is required"],
     },

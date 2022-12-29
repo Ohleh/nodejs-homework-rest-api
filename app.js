@@ -9,8 +9,8 @@ require("dotenv").config();
 
 const contactsRouter = require("./routes/api/contacts");
 const authRouter = require("./routes/api/users");
-const { error } = require("console");
 const tmpDir = path.join(__dirname, "tmp");
+// const { error } = require("console");
 // const fileDir = path.resolve("./public/avatars");
 // const fileDir = path.join(__dirname, "public", "avatars");
 

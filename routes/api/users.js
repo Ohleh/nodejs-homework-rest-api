@@ -19,6 +19,9 @@ router.post(
   ctrlWrapper(ctrl.register)
 );
 
+// verification-request
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verify));
+
 // signin
 router.post(
   "/login",
@@ -45,8 +48,5 @@ router.patch(
   upload.single("avatar"),
   ctrlWrapper(ctrl.updateAvatar)
 );
-
-// verification-request
-router.get("/verify/:verificationToken", verificationToken);
 
 module.exports = router;
