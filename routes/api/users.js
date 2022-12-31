@@ -22,6 +22,13 @@ router.post(
 // verification-request
 router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verify));
 
+// повтоне надсилання листа
+router.post(
+  "/verify",
+  validateBody(schemas.verifyEmailShema),
+  ctrlWrapper(ctrl.resendVerify)
+);
+
 // signin
 router.post(
   "/login",
