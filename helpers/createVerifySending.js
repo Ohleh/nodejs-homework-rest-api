@@ -1,6 +1,6 @@
 const { BASE_URL } = process.env;
 
-const createVerifySending = async (email, verificationToken) => {
+const createVerifySending = (email, verificationToken) => {
   const mail = {
     to: email,
     subject: "Confirmation registration",

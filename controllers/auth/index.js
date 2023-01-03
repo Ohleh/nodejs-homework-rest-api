@@ -5,7 +5,6 @@ const login = require("./login");
 const getCurrent = require("./getCurrent");
 const logout = require("./logout");
 const updateAvatar = require("./updateAvatar");
-const resendVerify = require("./resendVerify");
 
 module.exports = {
   register,

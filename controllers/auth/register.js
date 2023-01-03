@@ -28,7 +28,6 @@ const register = async (req, res) => {
   });
 
   const mail = createVerifySending(email, verificationToken);
-
   await sendEmail(mail);
 
   res.status(201).json({
