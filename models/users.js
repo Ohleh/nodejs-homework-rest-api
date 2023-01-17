@@ -32,6 +32,16 @@ const usersSchema = new Schema(
       type: String,
       default: "",
     },
+    verify: {
+      // чи є емейл верифікований
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
+      // токен вариф. який будемо відправляти на пошту і зберігати
+      type: String,
+      required: [true, "Verify token is required"],
+    },
   },
   { versionkey: false, timestamps: true },
   { __v: 0 }
@@ -50,11 +60,20 @@ const loginSchema = Joi.object({
   password: Joi.string().min(6).required(),
 });
 
+const verifyEmailShema = Joi.object({
+  email: Joi.string().required(),
+});
+
 const subscriptionSchema = Joi.object().keys({
   type: Joi.string().valid("starter", "pro", "business"),
 });
 
-const schemas = { registerSchema, loginSchema, subscriptionSchema };
+const schemas = {
+  registerSchema,
+  loginSchema,
+  subscriptionSchema,
+  verifyEmailShema,
+};
 
 const Users = model("users", usersSchema);
 

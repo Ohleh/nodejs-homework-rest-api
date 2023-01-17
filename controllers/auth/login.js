@@ -14,6 +14,10 @@ const login = async (req, res) => {
   if (!user) {
     throw RequestError(401, "Email not found");
   }
+  // перевірка щоб не видавати токет тому хто ще не підтвердив мило
+  if (!user.verify) {
+    throw RequestError(401, "Email not verify");
+  }
   const comparePasword = bcrypt.compare(password, user.password);
   if (!comparePasword) {
     throw RequestError(401, "Password wrong");
